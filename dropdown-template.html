@@ -1,0 +1,9 @@
+﻿<div class=wrap>
+	<input type=text class=hidden ng-blur="setCollapsed()" focus-me="expanded">
+	<div class="item input" ng-click="setExpanded()">{{selectedName}}</div>
+	<div ng-if=expanded class="list animate-if">
+		<div class="сurrency item" ng-repeat="currency in list" ng-click="setCurrency(currency.id)">
+			{{currency.name}}
+		</div>
+	</div>
+</div>
