@@ -1,4 +1,4 @@
-(function() {
+﻿(function() {
 	var app = angular.module('testCases', ['ngAnimate', 'App.filters', 'ngResource']);
 	app.directive('focusMe', ['$timeout', focusMe]);
 	app.factory('App.currency', currencyFactory);

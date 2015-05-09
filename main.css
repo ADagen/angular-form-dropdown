@@ -26,6 +26,7 @@
 }
 
 .input {
+	position: relative;
 	border: 1px solid lightgray;
 	width: 482px;
 	height: 55px;
@@ -34,7 +35,20 @@
 	box-sizing: border-box;
 }
 
+.input__arrow {
+	text-align: center;
+	line-height: 55px;
+	width: 55px;
+	height: 55px;
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	border-left: 1px solid lightgray;
+}
+
 .item {
+	position: relative;
 	padding: 5px 0 5px 20px;
 	border-bottom: 1px solid lightgray;
 	font-family: Arial, Helvetica;
@@ -46,6 +60,20 @@
 	box-sizing: border-box;
 	transition: background-color 0.3s ease, color 0.3s ease;
 	cursor: pointer;
+}
+.item__mark {
+	text-align: center;
+	line-height: 55px;
+	width: 55px;
+	height: 55px;
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	border: none;
+}
+.currency__mark {
+	color: lightgray;
 }
 .item:hover {
 	background-color: #F2F2F2;

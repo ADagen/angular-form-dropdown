@@ -1,9 +1,13 @@
 ﻿<div class=wrap>
 	<input type=text class=hidden ng-blur="setCollapsed()" focus-me="expanded">
-	<div class="item input" ng-click="setExpanded()">{{selectedName}}</div>
+	<div class="item input" ng-click="setExpanded()">
+		<span>{{selectedName}}</span>
+		<div class="input__arrow">▼</div>
+	</div>
 	<div ng-if=expanded class="list animate-if">
 		<div class="сurrency item" ng-repeat="currency in list" ng-click="setCurrency(currency.id)">
-			{{currency.name}}
+			<span class="{{currency.id == selected ? 'currency__mark' : ''}}">{{currency.name}}</span>
+			<div class="item__mark" ng-if="currency.id == selected">✔</div>
 		</div>
 	</div>
 </div>

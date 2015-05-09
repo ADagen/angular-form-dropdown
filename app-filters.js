@@ -1,4 +1,4 @@
-angular.module('App.filters', [])
+﻿angular.module('App.filters', [])
 	.filter('filterSelected', ['App.currency', function($currency) {
 		var filterSelected = function($base, selects) {
 			if (!$base.$resolved) { return []; }
