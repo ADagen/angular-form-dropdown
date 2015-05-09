@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<head>
+	<title>It works!</title>
+    <meta charset="utf-8">
+	<link rel="icon" href="https://angularjs.org/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="main.css">
+	
+	<script src="angular.1.4.0-rc.0.js" type="text/javascript"></script>
+	<script src="angular-animate.1.4.0-rc.0.js" type="text/javascript"></script>
+	<script src="angular-resource.1.4.0.js" type="text/javascript"></script>
+	
+	<script src="currency-form-controller.js" type="text/javascript"></script>
+	<script src="dropdown-directive.js" type="text/javascript"></script>
+	<script src="app-filters.js" type="text/javascript"></script>
+	
+	<script>
+		// пререндер откуда-то из нёдр бекенда
+		window.currencies = {
+			99 : { name: 'All', id: 99 },
+			0  : { name: 'EUR', id: 0 },
+			1  : { name: 'USD', id: 1 },
+			2  : { name: 'GBP', id: 2 }
+		};
+		
+		app = angular.module('testCases', ['ngAnimate', 'App.filters', 'ngResource']);
+		
+		/**
+		 * Директива для управления фокусом скрытых инпутов
+		 */
+		app.directive('focusMe', function($timeout) {
+			return {
+				scope: { trigger: '=focusMe' },
+				link: function(scope, element) {
+					scope.$watch('trigger', function(value) {
+						value && element[0].focus();
+					});
+				}
+			};
+		});
+		
+		/**
+		 * Сервис работы с валютами
+		 * Предоставляет форматирование id пар для валютам,
+		 * полный список валют с сервера,
+		 * функцию для превращения списка id валют в раскрытые объекты валют.
+		 */
+		app.factory('App.currency', function() {
+		
+			var separator = '/';
+			
+			// пререндер списка валют откуда-то из нёдр бекенда
+			var fullList = {
+				99 : { name: 'All', id: 99 },
+				0  : { name: 'EUR', id: 0 },
+				1  : { name: 'USD', id: 1 },
+				2  : { name: 'GBP', id: 2 }
+			};
+			
+			/**
+			 * @method App.currency.expand
+			 * @param {number} id
+			 * @returns {Object} - полный объект валюты по id
+			 */
+			var expand = function(id) {
+				return fullList[id];
+			};
+			
+			/**
+			 * @method App.currency.getPair
+			 * @param {number} id1
+			 * @param {number} id2
+			 * @returns {string} - отформатированный id валютной пары
+			 */
+			var getPair = function(id1, id2) {
+				return [
+					expand(id1).name,
+					separator,
+					expand(id2).name
+				].join('');
+			};
+			
+			return {
+				fullList : fullList,
+				getPair	 : getPair,
+				expand 	 : expand
+			};
+		});
+		
+		app.controller('currencyForm', ['$scope', 'App.currency', '$resource', currencyForm]);
+		app.directive('dropdown', dropdown);
+	</script>
+</head>
+<body ng-app=testCases>
+	<div ng-controller=currencyForm>
+		<form ng-submit="submit()" class="form-horizontal" novalidate>
+			<h3>Currency form</h3>
+			<dropdown class=form-item list=list1 selected='selects.selected1'></dropdown>	
+			<dropdown class=form-item list=list2 selected='selects.selected2' ng-if=showFuther></dropdown>
+						
+			<div class='animate-if result' ng-if=showFuther>
+				{{selects.selected1}} - {{selects.selected2}} <br>
+				<div ng-repeat='currency in base | filterSelected:selects as results'>
+					<pre>{{currency}}</pre>
+				</div>
+				<div ng-if="results.length == 0">
+					<strong>No results found...</strong>
+				</div>
+			</div>
+			<button class=form-item>Submit</button>
+		</form>
+	</div>
+</body>
+</html>
