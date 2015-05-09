@@ -10,6 +10,6 @@ angular.module('App.filters', [])
 			});
 		};
 		
-		filterSelected.$stateful = false;
+		filterSelected.$stateful = true;
 		return filterSelected;
 	}]);

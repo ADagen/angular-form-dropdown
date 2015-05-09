@@ -1,12 +1,12 @@
-﻿function dropdown($timeout) {
+﻿function dropdown($timeout, $currency) {
 	
 	function initialize(scope, iElement, iAttrs) {
 		scope.expanded = false;
-		scope.selectedName = currencies[scope.selected].name;
+		scope.selectedName = $currency.expand(scope.selected).name;
 		
 		scope.setCurrency = function(id) {
 			scope.selected = id;
-			scope.selectedName = currencies[scope.selected].name;
+			scope.selectedName = $currency.expand(scope.selected).name;
 			scope.expanded = false;
 		}
 		

@@ -14,14 +14,6 @@
 	<script src="app-filters.js" type="text/javascript"></script>
 	
 	<script>
-		// пререндер откуда-то из нёдр бекенда
-		window.currencies = {
-			99 : { name: 'All', id: 99 },
-			0  : { name: 'EUR', id: 0 },
-			1  : { name: 'USD', id: 1 },
-			2  : { name: 'GBP', id: 2 }
-		};
-		
 		app = angular.module('testCases', ['ngAnimate', 'App.filters', 'ngResource']);
 		
 		/**
@@ -87,19 +79,21 @@
 		});
 		
 		app.controller('currencyForm', ['$scope', 'App.currency', '$resource', currencyForm]);
-		app.directive('dropdown', dropdown);
+		app.directive('dropdown', ['$timeout', 'App.currency', dropdown]);
 	</script>
 </head>
 <body ng-app=testCases>
 	<div ng-controller=currencyForm>
 		<form ng-submit="submit()" class="form-horizontal" novalidate>
 			<h3>Currency form</h3>
+
 			<dropdown class=form-item list=list1 selected='selects.selected1'></dropdown>	
 			<dropdown class=form-item list=list2 selected='selects.selected2' ng-if=showFuther></dropdown>
 						
 			<div class='animate-if result' ng-if=showFuther>
 				{{selects.selected1}} - {{selects.selected2}} <br>
 				<div ng-repeat='currency in base | filterSelected:selects as results'>
+
 					<pre>{{currency}}</pre>
 				</div>
 				<div ng-if="results.length == 0">

@@ -24,6 +24,7 @@
 		'get':    { method: 'GET' },
 		'query':  { method: 'GET', isArray: false }
 	});
+	
 	exchangeRate.get({}, function(result) {
 		$scope.base = result;
 		console.log('Loaded exchangeRate:', result.base);
