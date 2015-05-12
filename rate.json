@@ -12,5 +12,11 @@
 		"ask":"0.79293",
 		"spread":"0.4",
 		"move":"down"
+	},{
+		"name":"USD/GBP",
+		"bid":"0.79276",
+		"ask":"0.79293",
+		"spread":"0.4",
+		"move":"down"
 	}]
 }
