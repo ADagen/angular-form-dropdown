@@ -1,6 +1,7 @@
 ﻿angular.module('App.filters', [])
 	.filter('filterSelected', ['App.currency', function($currency) {
 		var filterSelected = function($base, selects) {
+			if (!$base) { return []; }
 			if (!$base.$resolved) { return []; }
 			
 			if (selects.selected1 == 99) {
