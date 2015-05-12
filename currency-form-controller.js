@@ -1,6 +1,7 @@
 ﻿function currencyForm($scope, $currency, $resource) {
 	
 	var continueCurrency = 0; // id валюты, для которой появляется второй дропдаун и панелька с курсами
+	var allCurrency = 99; // id валюты, которая считается включающей все остальные валюты
 	$scope.selects = {
 		selected1: 1,  // id валюты, по-умолчанию выбранной для первого селекта
 		selected2: 1   // ...и для второго селекта
@@ -8,6 +9,7 @@
 	
 	$scope.$watch('selects.selected1', function(newValue, oldValue) {
 		$scope.showFuther = newValue == continueCurrency;
+		$scope.showResult = newValue == continueCurrency || newValue == allCurrency;
 	});
 	
 	$scope.$watch('selects.selected2', function(newValue, oldValue) {
