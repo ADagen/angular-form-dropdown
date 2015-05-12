@@ -25,7 +25,7 @@
 			<dropdown class=form-item list=list1 selected='selects.selected1'></dropdown>	
 			<dropdown class=form-item list=list2 selected='selects.selected2' ng-if=showFuther></dropdown>
 						
-			<div class='animate-if result'r>
+			<div class='animate-if result' ng-if=showResult>
 				{{selects.selected1}} - {{selects.selected2}} <br>
 				<div ng-repeat='currency in base | filterSelected:selects as results'>
 					<pre>{{currency}}</pre>
