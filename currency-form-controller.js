@@ -8,7 +8,7 @@
 	};
 	
 	$scope.$watch('selects.selected1', function(newValue, oldValue) {
-		$scope.showFuther = newValue == continueCurrency;
+		$scope.showFuther = newValue == continueCurrency || newValue == allCurrency;
 		$scope.showResult = newValue == continueCurrency || newValue == allCurrency;
 	});
 	
